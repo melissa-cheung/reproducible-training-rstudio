@@ -82,4 +82,4 @@ uk_plot <- uk_data_fig %>%
 ggarrange(euro_plot, uk_plot, ncol=2, nrow=1, labels="AUTO")
 ```
 
-
+some text at the end of this notebook.
