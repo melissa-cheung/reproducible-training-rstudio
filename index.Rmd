@@ -1,0 +1,46 @@
+---
+title: "My AMAZING Website"
+author: Melissa Cheung
+date: 1 December 2022
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# How now
+
+## Brown cow {#markdown-header}
+
+\
+
+### I'm fine thanks
+
+Some normal text and an internal link to [Brown cow](#markdown-header)
+
+Link to [external website](#https://www.google.com)
+
+<!-- Here is a comment that is hidden -->
+
+That's **bold** And *italics*
+
+This text has a footnote [^1].
+
+[^1]: This is my footnote text.
+
+## Inserting images
+
+Here is the R logo.
+![R logo](img/rlogo.png)
+
+## Blocks
+Block
+
+> here is my block
+
+```{r}
+print("Hello World!")
+x <- 1
+```
+
+

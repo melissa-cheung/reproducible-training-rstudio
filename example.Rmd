@@ -1,0 +1,80 @@
+---
+title: "Gapminder dataset example"
+author: Melissa Cheung
+output: html_document
+date: "2022-12-01"
+---
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(rmarkdown)
+library(kableExtra)
+library(ggpubr)
+```
+
+
+```{r load-data, message=FALSE}
+
+#read file into R
+pop_data <- read_csv("data/gapminder_data.csv")
+
+#create a table with data from European countries in 2007 showing the countries 
+#with the largest life expectancy at the top 
+euro_data_tbl <- pop_data %>% 
+                    filter(continent == "Europe" & year == 2007) %>% 
+                    select(-continent, -year) %>% 
+                    arrange(desc(lifeExp)) %>% 
+                    rename(Country = country, "Population Size" = pop, 
+                      "Life Expectancy" = lifeExp, "GDP" = gdpPercap)
+    
+```
+
+```{r kbl}
+euro_data_tbl %>% 
+          kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive", full_width = F))
+```
+
+## Paged table
+```{r paged-table}
+paged_table(euro_data_tbl)
+```
+
+## Challenge
+Create a new dataset euro_data_fig by filtering the pop_data tibble to contain only data from Europe. Draw a plot to display the lifeExp on the y axis and year on the x axis. Use geom_violin() to draw this as a violin plot to show the distrubution of the data across each year and save it in a euro_plot variable.
+
+```{r euro-data}
+euro_data_fig <- pop_data %>%
+  filter(continent == "Europe") %>% 
+                    mutate(year=as_factor(year))
+
+euro_plot <- ggplot(data = euro_data_fig, 
+                    aes(x = year, y = lifeExp))+
+  geom_violin()
+euro_plot
+```
+
+Create a new dataset uk_data_fig by filtering the pop_data tibble to contain only data from the United Kingdom. Draw a scatter plot to display the lifeExp on the y axis and year on the x axis and save it in a uk_plot variable.
+Draw the euro_plot created in the previous challenge next to a uk_plot using the ggarrange() function. Label the plots A and B respectively.
+```{r uk-data}
+uk_data_fig <- pop_data %>%
+  filter(country == "United Kingdom")
+
+uk_plot <- ggplot(data = uk_data_fig, aes(x = year, y = lifeExp))+
+  geom_point()
+
+uk_plot
+
+ggarrange(euro_plot, uk_plot,
+          labels = c("A", "B"))
+```
+
+
+
+
+
+
+
+
+
+

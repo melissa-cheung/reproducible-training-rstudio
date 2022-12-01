@@ -1,0 +1,12 @@
+name: "my-website"
+navbar:
+  title: "My FANTASTIC Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Challenge"
+      href: challenge.html
+    - text: "Example"
+      href: example.html
